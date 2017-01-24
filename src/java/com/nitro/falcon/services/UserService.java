@@ -7,6 +7,9 @@ import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.nitro.falcon.models.User;
 import com.sun.istack.Nullable;
 import java.io.UnsupportedEncodingException;
+import org.abstractj.kalium.crypto.Password;
+import org.abstractj.kalium.crypto.Random;
+import org.abstractj.kalium.encoders.Hex;
 
 /**
  * UserService
@@ -32,5 +35,20 @@ public class UserService {
             err.printStackTrace();
             return null;
         }
+    }
+    
+    public byte[] genSalt() {
+        final Random rand = new Random();
+        return rand.randomBytes();
+    }
+    
+    public String hashPassword(final String value, final byte[] salt) {
+        final Password passwd = new Password();
+        return passwd.hash(
+            value.getBytes(),
+            new Hex(), salt,
+            (int) Math.pow(2, 20),
+            (int) Math.pow(2, 24)
+        );
     }
 }

@@ -7,4 +7,5 @@ package com.nitro.falcon.models;
 public class User {
     public String username;
     public String password;
+    public byte[] salt;
 }
