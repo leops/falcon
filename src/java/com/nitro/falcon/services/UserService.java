@@ -16,7 +16,7 @@ import org.abstractj.kalium.encoders.Hex;
  * @author leops
  */
 public class UserService {
-    public @Nullable String getToken(final User user) {
+    public static @Nullable String getToken(final User user) {
         try {
             return JWT.create()
                     .withSubject(user.username)
@@ -27,7 +27,7 @@ public class UserService {
         }
     }
     
-    public @Nullable User fromToken(final String token) {
+    public static @Nullable User fromToken(final String token) {
         try {
             JWT.decode(token).getSubject();
             return null;
@@ -37,12 +37,12 @@ public class UserService {
         }
     }
     
-    public byte[] genSalt() {
+    public static byte[] genSalt() {
         final Random rand = new Random();
         return rand.randomBytes();
     }
     
-    public String hashPassword(final String value, final byte[] salt) {
+    public static String hashPassword(final String value, final byte[] salt) {
         final Password passwd = new Password();
         return passwd.hash(
             value.getBytes(),
