@@ -1,4 +1,4 @@
-package com.nitro.falcon.api.daos;
+package com.nitro.falcon.daos;
 
 import com.nitro.falcon.models.User;
 import javax.ejb.Local;

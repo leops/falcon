@@ -5,11 +5,14 @@
         <title>Home</title>
     </h:head>
     <h:body>
-        <p:dataList value="#{homeView.courses}" var="coures" type="ordered">
+        <p:dataList value="#{homeView.courses}" var="course" type="ordered">
             <f:facet name="header">
                 Courses
             </f:facet>
             #{course.name}: #{course.description}
+            <p:link outcome="course" value="Take course" rendered="#{homeView.logged}">
+                <f:param name="courseId" value="#{course.name}" />
+            </p:link>
         </p:dataList>
     </h:body>
 </html>

@@ -1,6 +1,6 @@
-package com.nitro.falcon.api.daos.jpa;
+package com.nitro.falcon.daos.jpa;
 
-import com.nitro.falcon.api.daos.UserDAO;
+import com.nitro.falcon.daos.UserDAO;
 import com.nitro.falcon.models.User;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -11,7 +11,7 @@ import javax.persistence.PersistenceContext;
  * @author leops
  */
 @Stateless
-public class JpaUserDAO implements UserDAO {
+public class UserDAOImpl implements UserDAO {
     @PersistenceContext(name="Falcon-PU")
     private EntityManager em;
     

@@ -17,7 +17,25 @@ public class Quizz implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    public long id;
+    private long id;
     
-    public List<String> questions;
+    private List<String> questions;
+    
+    public long getId() {
+        return id;
+    }
+
+    public void setId(final long id) {
+        this.id = id;
+    }
+
+    public List<String> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(final List<String> questions) {
+        this.questions = questions;
+    }
+    
+    
 }

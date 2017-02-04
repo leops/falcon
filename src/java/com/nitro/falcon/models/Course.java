@@ -18,13 +18,37 @@ public class Course implements Serializable {
     @Id
     @NotEmpty
     @Column(unique=true, nullable=false)
-    public String name;
+    private String name;
     
     @NotEmpty
     @Column(nullable=false)
-    public String description;
+    private String description;
     
-    public List<String> modules;
+    private List<String> modules;
     
-    public long duration;
+    private long duration;
+    
+    public String getName() {
+        return name;
+    }
+    
+    public void setName(final String name) {
+        this.name = name;
+    }
+    
+    public String getDescription() {
+        return description;
+    }
+    
+    public void setDescription(final String description) {
+        this.description = description;
+    }
+    
+    public List<String> getModules() {
+        return modules;
+    }
+    
+    public long getDuration() {
+        return duration;
+    }
 }

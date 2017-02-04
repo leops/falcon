@@ -9,6 +9,7 @@ import com.sun.istack.Nullable;
 import java.io.UnsupportedEncodingException;
 import org.abstractj.kalium.crypto.Password;
 import org.abstractj.kalium.crypto.Random;
+import org.abstractj.kalium.encoders.Encoder;
 import org.abstractj.kalium.encoders.Hex;
 
 /**
@@ -19,7 +20,7 @@ public class UserService {
     public static @Nullable String getToken(final User user) {
         try {
             return JWT.create()
-                    .withSubject(user.username)
+                    .withSubject(user.getUsername())
                     .sign(Algorithm.HMAC256("secret"));
         } catch(final JWTCreationException | UnsupportedEncodingException err) {
             err.printStackTrace();
@@ -37,18 +38,21 @@ public class UserService {
         }
     }
     
+    private static final Random RAND = new Random();
     public static byte[] genSalt() {
-        final Random rand = new Random();
-        return rand.randomBytes();
+        return RAND.randomBytes();
     }
     
+    private static final Password PASSWD = new Password();
+    private static final Encoder ENCODER = new Hex();
+    private static final int OPS_LIMIT = (int) Math.pow(2, 20);
+    private static final long MEM_LIMIT = (long) Math.pow(2, 24);
     public static String hashPassword(final String value, final byte[] salt) {
-        final Password passwd = new Password();
-        return passwd.hash(
+        return PASSWD.hash(
             value.getBytes(),
-            new Hex(), salt,
-            (int) Math.pow(2, 20),
-            (int) Math.pow(2, 24)
+            ENCODER, salt,
+            OPS_LIMIT,
+            MEM_LIMIT
         );
     }
 }

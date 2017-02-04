@@ -1,6 +1,6 @@
 package com.nitro.falcon.servlets;
 
-import com.nitro.falcon.api.daos.UserDAO;
+import com.nitro.falcon.daos.UserDAO;
 import com.nitro.falcon.models.User;
 import com.nitro.falcon.services.UserService;
 import java.io.IOException;
@@ -32,7 +32,7 @@ public class LoginController extends HttpServlet {
         
         final User user = userDAO.findByName(username);
         if(user != null) {
-            if(UserService.hashPassword(password, user.salt).equals(user.password)) {
+            if(UserService.hashPassword(password, user.getSalt()).equals(user.getPassword())) {
                 req.getSession().setAttribute("user", username);
                 resp.sendRedirect(getServletContext().getContextPath());
                 return;

@@ -17,13 +17,37 @@ public class User implements Serializable {
     @Id
     @NotEmpty
     @Column(unique=true, nullable=false)
-    public String username;
+    private String username;
     
     @NotEmpty
     @Column(nullable=false)
-    public String password;
+    private String password;
     
     @NotEmpty
     @Column(nullable=false)
-    public byte[] salt;
+    private byte[] salt;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public byte[] getSalt() {
+        return salt;
+    }
+
+    public void setSalt(byte[] salt) {
+        this.salt = salt;
+    }
 }

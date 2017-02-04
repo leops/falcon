@@ -1,4 +1,4 @@
-package com.nitro.falcon.api;
+package com.nitro.falcon.apis;
 
 import javax.jws.WebService;
 import javax.jws.WebMethod;
