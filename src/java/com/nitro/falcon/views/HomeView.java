@@ -25,10 +25,7 @@ public class HomeView implements Serializable {
     
     @EJB(beanName=CourseDAO.IMPL_NAME)
     private CourseDAO courseDAO;
-    
-    @EJB(beanName=QuizzDAO.IMPL_NAME)
-    private QuizzDAO quizzDAO;
-    
+
     @ManagedProperty("#{sessionData}")
     private SessionData session;
     
@@ -44,12 +41,14 @@ public class HomeView implements Serializable {
     public List<Course> getCourses() {
         return courses;
     }
-    
-    public Quizz getQuizz() {
-        return quizzDAO.findById(0);
-    }
 
     public void takeCourse(final Course course) {
         session.getUser().viewCourse(course);
+    }
+    
+    public boolean hasPassedQuizz() {
+        final Quizz quizz = new Quizz();
+        quizz.setId(0);
+        return session.getUser().hasPassedQuizz(quizz);
     }
 }

@@ -84,6 +84,6 @@ public class User implements Serializable {
     
     public boolean hasPassedQuizz(final Quizz quizz) {
         return passedQuizzes.stream()
-            .anyMatch(q -> q.getId() == quizz.getId());
+            .anyMatch(q -> q!= null && q.getId() == quizz.getId());
     }
 }

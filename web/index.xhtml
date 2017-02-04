@@ -35,7 +35,7 @@
                 <f:facet name="footer">
                     <h:form rendered="#{sessionData.logged}">
                         <p:commandButton value="Take course" rendered="#{!sessionData.user.hasViewedCourse(course)}" action="#{homeView.takeCourse(course)}" ajax="false" />
-                        <p:link value="Pass quizz" rendered="#{sessionData.user.hasViewedCourse(course) and !sessionData.user.hasPassedQuizz(quizz)}" outcome="quizz">
+                        <p:link value="Pass quizz" rendered="#{sessionData.user.hasViewedCourse(course) and !homeView.hasPassedQuizz()}" outcome="quizz">
                             <f:param name="quizzId" value="0" />
                         </p:link>
                     </h:form>
