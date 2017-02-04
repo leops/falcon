@@ -7,7 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
- * JpaUserDAO
+ * UserDAOImpl
  * @author leops
  */
 @Stateless
@@ -18,5 +18,10 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public User findByName(String username) {
         return em.find(User.class, username);
+    }
+
+    @Override
+    public void save(final User user) {
+        em.persist(user);
     }
 }

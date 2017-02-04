@@ -1,6 +1,7 @@
 package com.nitro.falcon.models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,9 +25,13 @@ public class Course implements Serializable {
     @Column(nullable=false)
     private String description;
     
-    private List<String> modules;
+    private final List<String> modules;
     
     private long duration;
+    
+    public Course() {
+        modules = new ArrayList<>();
+    }
     
     public String getName() {
         return name;
@@ -50,5 +55,9 @@ public class Course implements Serializable {
     
     public long getDuration() {
         return duration;
+    }
+
+    public void setDuration(final long duration) {
+        this.duration = duration;
     }
 }

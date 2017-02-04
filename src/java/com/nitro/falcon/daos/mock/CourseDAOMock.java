@@ -16,11 +16,18 @@ import javax.ejb.Stateless;
 public class CourseDAOMock implements CourseDAO {
     private static final Map<String, Course> courses = new HashMap<>();
     static {
-        final Course course1 = new Course();
-        course1.setName("Course 1");
-        course1.setDescription("Blah");
-        
-        courses.put(course1.getName(), course1);
+        for(int i = 1; i <= 5; i++) {
+            final Course course = new Course();
+            course.setName("Course " + i);
+            course.setDescription("Description");
+            course.setDuration((long) Math.ceil(Math.random() * 5));
+            
+            for(int j = 1; j <= course.getDuration(); j++) {
+                course.getModules().add("Module " + j);
+            }
+
+            courses.put(course.getName(), course);
+        }
     }
     
     @Override

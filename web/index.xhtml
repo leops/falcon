@@ -5,14 +5,42 @@
         <title>Home</title>
     </h:head>
     <h:body>
-        <p:dataList value="#{homeView.courses}" var="course" type="ordered">
+        <p:menubar>
+            <f:facet name="options">
+                <p:button value="Login" rendered="#{!sessionData.logged}" outcome="login" />
+                <p:commandButton value="Logout" rendered="#{sessionData.logged}" action="#{sessionData.logout()}" />
+            </f:facet>
+        </p:menubar>
+        
+        <p:dataGrid value="#{homeView.courses}" var="course" columns="5" layout="grid">
             <f:facet name="header">
                 Courses
             </f:facet>
-            #{course.name}: #{course.description}
-            <p:link outcome="course" value="Take course" rendered="#{homeView.logged}">
-                <f:param name="courseId" value="#{course.name}" />
-            </p:link>
-        </p:dataList>
+            
+            <p:panelGrid columns="2">
+                <h:outputText value="Name:" />
+                <h:outputText value="#{course.name}" />
+
+                <h:outputText value="Description:" />
+                <h:outputText value="#{course.description}" />
+
+                <h:outputText value="Duration:" />
+                <h:outputText value="#{course.duration}" />
+
+                <h:outputText value="Modules:" />
+                <p:dataList value="#{course.modules}" var="module" type="definition">
+                    #{module}
+                </p:dataList>
+                
+                <f:facet name="footer">
+                    <h:form rendered="#{sessionData.logged}">
+                        <p:commandButton value="Take course" rendered="#{!sessionData.user.hasViewedCourse(course)}" action="#{homeView.takeCourse(course)}" ajax="false" />
+                        <p:link value="Pass quizz" rendered="#{sessionData.user.hasViewedCourse(course) and !sessionData.user.hasPassedQuizz(quizz)}" outcome="quizz">
+                            <f:param name="quizzId" value="0" />
+                        </p:link>
+                    </h:form>
+                </f:facet>
+            </p:panelGrid>
+        </p:dataGrid>
     </h:body>
 </html>

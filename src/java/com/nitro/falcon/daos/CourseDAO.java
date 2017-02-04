@@ -5,7 +5,7 @@ import java.util.List;
 import javax.ejb.Local;
 
 /**
- * UserDAO
+ * CourseDAO
  * @author leops
  */
 @Local

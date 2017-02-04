@@ -9,5 +9,10 @@ import javax.ejb.Local;
  */
 @Local
 public interface UserDAO {
+    // Replace with UserDAOImpl to use JPA
+    public static final String IMPL_NAME = "UserDAOMock";
+    
     User findByName(final String username);
+
+    public void save(User user);
 }

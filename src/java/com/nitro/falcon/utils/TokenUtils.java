@@ -1,4 +1,4 @@
-package com.nitro.falcon.services;
+package com.nitro.falcon.utils;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -13,10 +13,10 @@ import org.abstractj.kalium.encoders.Encoder;
 import org.abstractj.kalium.encoders.Hex;
 
 /**
- * UserService
+ * TokenUtils
  * @author leops
  */
-public class UserService {
+public class TokenUtils {
     public static @Nullable String getToken(final User user) {
         try {
             return JWT.create()
@@ -28,10 +28,9 @@ public class UserService {
         }
     }
     
-    public static @Nullable User fromToken(final String token) {
+    public static @Nullable String fromToken(final String token) {
         try {
-            JWT.decode(token).getSubject();
-            return null;
+            return JWT.decode(token).getSubject();
         } catch (final JWTDecodeException err){
             err.printStackTrace();
             return null;

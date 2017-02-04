@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui" >
+    <h:head>
+        <title>Quizz</title>
+    </h:head>
+    <h:body>
+        <f:metadata>
+            <f:viewParam name="quizzId" value="#{quizzView.quizzId}" />
+        </f:metadata>
+        
+        <p:menubar>
+            <f:facet name="options">
+                <p:commandButton type="button" value="Login" rendered="#{sessionData.logged}" />
+                <p:commandButton type="button" value="Logout" rendered="#{!sessionData.logged}" action="#{sessionData.logout()}" />
+            </f:facet>
+        </p:menubar>
+
+        <p:dataList value="#{quizzView.quizz.questions}" var="question">
+            <f:facet name="header">
+                Questions
+            </f:facet>
+            
+            #{question}
+            
+            <f:facet name="footer">
+                <h:form>
+                    <p:commandButton value="Pass" actionListener="#{quizzView.passQuizz}" ajax="false" />
+                </h:form>
+            </f:facet>
+        </p:dataList>
+    </h:body>
+</html>

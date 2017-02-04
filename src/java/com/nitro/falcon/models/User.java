@@ -1,9 +1,12 @@
 package com.nitro.falcon.models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import org.hibernate.validator.constraints.NotEmpty;
 
 /**
@@ -26,6 +29,17 @@ public class User implements Serializable {
     @NotEmpty
     @Column(nullable=false)
     private byte[] salt;
+    
+    @OneToMany
+    private final List<Course> viewedCourses;
+    
+    @OneToMany
+    private final List<Quizz> passedQuizzes;
+    
+    public User() {
+        viewedCourses = new ArrayList<>();
+        passedQuizzes = new ArrayList<>();
+    }
 
     public String getUsername() {
         return username;
@@ -49,5 +63,25 @@ public class User implements Serializable {
 
     public void setSalt(byte[] salt) {
         this.salt = salt;
+    }
+
+    public List<Course> getViewedCourses() {
+        return viewedCourses;
+    }
+    
+    public void viewCourse(final Course course) {
+        viewedCourses.add(course);
+    }
+    
+    public boolean hasViewedCourse(final Course course) {
+        return viewedCourses.contains(course);
+    }
+    
+    public void passQuizz(final Quizz quizz) {
+        passedQuizzes.add(quizz);
+    }
+    
+    public boolean hasPassedQuizz(final Quizz quizz) {
+        return passedQuizzes.contains(quizz);
     }
 }
