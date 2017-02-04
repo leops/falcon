@@ -74,7 +74,8 @@ public class User implements Serializable {
     }
     
     public boolean hasViewedCourse(final Course course) {
-        return viewedCourses.contains(course);
+        return viewedCourses.stream()
+            .anyMatch(c -> c.getName().equals(course.getName()));
     }
     
     public void passQuizz(final Quizz quizz) {
@@ -82,6 +83,7 @@ public class User implements Serializable {
     }
     
     public boolean hasPassedQuizz(final Quizz quizz) {
-        return passedQuizzes.contains(quizz);
+        return passedQuizzes.stream()
+            .anyMatch(q -> q.getId() == quizz.getId());
     }
 }

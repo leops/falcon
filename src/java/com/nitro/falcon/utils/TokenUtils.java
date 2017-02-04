@@ -16,7 +16,11 @@ import org.abstractj.kalium.encoders.Hex;
  * TokenUtils
  * @author leops
  */
-public class TokenUtils {
+public final class TokenUtils {
+    private TokenUtils() {
+        // Prevent instantiation
+    }
+    
     public static @Nullable String getToken(final User user) {
         try {
             return JWT.create()
